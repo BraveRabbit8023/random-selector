@@ -11,9 +11,11 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
         with:
-          submodules: false
+          persist-credentials: false
+          fetch-depth: 0
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -22,7 +24,7 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         
       - name: Build
         run: npm run build
@@ -30,9 +32,10 @@ jobs:
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
         
-      - name: Deploy
+      - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: out
-          clean: true 
+          clean: true
+          token: ${{ secrets.GITHUB_TOKEN }} 
