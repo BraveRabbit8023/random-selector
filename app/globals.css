@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.category-item {
+  --highlight-color: 0, 0, 0;  /* 默认值 */
+}
+
+.category-item:hover {
+  background-color: rgba(var(--highlight-color), 0.5) !important;
+} 
